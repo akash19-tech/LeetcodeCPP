@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void twins(int index, string& digits, string& temp, vector<string>& ans,vector<string>& curr){
+        int n=digits.size();
+        if(index==n){
+            if(temp.length()){
+                ans.push_back(temp);
+            }
+            return;
+        }
+        int m=digits[index]-'0';
+        string mp=curr[m];
+        int j=mp.size();
+        for(int i=0;i<j;i++){
+            temp.push_back(mp[i]);
+            twins(index+1,digits,temp,ans,curr);
+            temp.pop_back();
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+        int n=digits.size();
+        vector<string> ans;
+        string temp;
+        vector<string> mp={"0","0","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        twins(0,digits,temp,ans,mp);
+        return ans;
+    }
+};
